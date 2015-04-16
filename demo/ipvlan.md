@@ -2,8 +2,6 @@
 
 ## L3 mode
 
-### Set up two network name spaces
-
 ### Machine 1
 
 ```

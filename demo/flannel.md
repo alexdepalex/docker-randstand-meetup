@@ -4,7 +4,7 @@
 etcdctl ls /coreos.com/network --recursive
 ```
 
-## Terminal 1
+## Machine 1
 
 ```
 ssh core@192.168.12.100
@@ -14,7 +14,7 @@ ssh core@192.168.12.100
 docker run -t -i busybox /bin/sh -c 'ifconfig eth0 && nc -l -p 80'
 ```
 
-## Terminal 2
+## Machine 2
 
 ```
 ssh core@192.168.12.101
