@@ -1,0 +1,128 @@
+An Introduction Building Large Reliable Systems
+Docker Randstad
+
+Tags: coreos
+
+Kelsey Hightower
+CoreOS
+kelsey.hightower@coreos.com
+@kelseyhightower
+
+* Distributed systems
+
+* Distributed systems
+
+I'm sure that container management system you are working on is going to be awesome.
+
+.image images/personal-container-mngmnt3.jpg
+
+* Distributed systems
+
+But it scales!
+
+.image images/personal-container-mngmnt2.jpg
+
+* Distributed systems
+
+A collection of machines connected through a network acting as a single machine.
+
+- Scalability: ability to handle increases in load.
+- Highly Available: continue operation even when components fail.
+- Fault Tolerance: recover from failures without corrupting the system.
+- Consistent: operate like a single machine.
+
+Running a bunch of machines does not mean you have a distributed system.
+
+- You just have a bunch of machines.
+
+* Distributed systems
+
+.image images/page_baran_networks.png 497 795
+
+* Distributed systems pros and cons
+
+Pros:
+
+- Leverage proven solutions for fault tolerance.
+- Your best shot at 99.999% uptime.
+
+Cons:
+
+- More moving parts; increased complexity.
+- Steep learning curve (vector clocks, weak vs strong consistency).
+- Software must be designed to handle failures.
+
+* Distributed systems
+
+.image images/Fleet-Scheduling.png
+
+* CoreOS Linux
+
+.image images/Host-Diagram.png
+
+* CoreOS Linux
+
+Container optimized Linux distribution.
+
+- Only ships the necessary bits: Linux, systemd, container runtime.
+- Automatic atomic updates. Download in the background; reboot to apply.
+- Clean separation between the OS and applications.
+
+Rolling releases:
+
+- Always up-to-date versions of Linux, systemd, and the CoreOS userland.
+
+* etcd
+
+.link https://github.com/coreos/etcd github.com/coreos/etcd
+
+Distributed key/value store and lock service.
+
+- Data replication with strong consistency guarantees (sequential consistency).
+- Provides persistent storage for cluster configuration.
+- Provides a global lock service (leader elections).
+
+etcd is the core of a CoreOS cluster.
+
+- The source of truth in the cluster.
+- Implements the raft protocol for high availability and fault tolerance.
+
+* etcd demo
+
+* flannel
+
+* flannel
+
+.image images/packet-01.png 565 _
+
+* flannel
+
+etcd backed network fabric for containers
+
+- Built to provide the networking model require by the Kubernetes project 
+- Uses Universal TUN/TAP device to create an overlay network using UDP to encapsulate IP packets
+- Automates subnet allocation with the help of etcd
+
+Multiple backends
+
+- udp - use UDP to encapsulate the packets
+- alloc - only perform subnet allocation (no forwarding of data packets)
+- vxlan - use in-kernel VXLAN to encapsulate the packets
+- host-gw - create IP routes to subnets via remote machine IPs
+
+* flannel demo
+
+* ipvlan
+
+* ipvlan
+
+* How to learn more
+
+Install CoreOS and read a few white papers:
+
+.link http://book.mixu.net/distsys Distributed systems for fun and profit 
+.link http://static.googleusercontent.com/media/research.google.com/en/us/archive/chubby-osdi06.pdf The Chubby lock service for loosely-coupled distributed systems
+.link https://raftconsensus.github.io The Raft Consensus Algorithm
+.link http://en.wikipedia.org/wiki/Two_Generals%27_Problem en.wikipedia.org/wiki/Two_Generals_Problem
+.link http://en.wikipedia.org/wiki/Leslie_Lamport en.wikipedia.org/wiki/Leslie_Lamport
+.link http://en.wikipedia.org/wiki/Paul_Baran en.wikipedia.org/wiki/Paul_Baran
