@@ -4,6 +4,8 @@
 
 ### Set up two network name spaces
 
+### Machine 1
+
 ```
 ssh core@192.168.12.100
 ```
@@ -22,6 +24,8 @@ ip addr add 127.0.0.1 dev lo
 ip addr add 10.10.0.100/8 dev ipvl0
 ip route add default dev ipvl0
 ```
+
+### Machine 2
 
 ```
 ssh core@192.168.12.101
